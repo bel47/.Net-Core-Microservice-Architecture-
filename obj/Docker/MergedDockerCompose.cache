@@ -1,5 +1,23 @@
 name: dockercompose9358993901870551065
 services:
+  apigateway:
+    build:
+      context: C:\Users\bradmin\source\repos\DemoMicroServicesSolution
+      dockerfile: ApiGateway/Dockerfile
+    container_name: api-gateway
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: apigateway
+    networks:
+      backend: null
+    ports:
+    - mode: ingress
+      target: 80
+      protocol: tcp
+    - mode: ingress
+      target: 80
+      published: "8001"
+      protocol: tcp
   customerdb:
     container_name: customer_db
     environment:
@@ -11,13 +29,13 @@ services:
     ports:
     - mode: ingress
       target: 1433
-      published: "8001"
+      published: "18001"
       protocol: tcp
   customerwebapi:
     build:
       context: C:\Users\bradmin\source\repos\DemoMicroServicesSolution
       dockerfile: CustomerWebAPI/Dockerfile
-    container_name: customer_api
+    container_name: customer-api
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: https://+:443;http://+:80
@@ -30,10 +48,6 @@ services:
     ports:
     - mode: ingress
       target: 80
-      protocol: tcp
-    - mode: ingress
-      target: 80
-      published: "8002"
       protocol: tcp
     - mode: ingress
       target: 443
@@ -51,6 +65,32 @@ services:
       read_only: true
       bind:
         create_host_path: true
+  orderdb:
+    container_name: order_db
+    image: mongo
+    networks:
+      backend: null
+    ports:
+    - mode: ingress
+      target: 27017
+      published: "18005"
+      protocol: tcp
+  orderwebapi:
+    build:
+      context: C:\Users\bradmin\source\repos\DemoMicroServicesSolution
+      dockerfile: OrderWebApi/Dockerfile
+    container_name: order-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      DB_HOST: orderdb
+      DB_Name: dms_order
+    image: orderwebapi
+    networks:
+      backend: null
+    ports:
+    - mode: ingress
+      target: 80
+      protocol: tcp
   productdb:
     container_name: product_db
     environment:
@@ -61,13 +101,13 @@ services:
     ports:
     - mode: ingress
       target: 3306
-      published: "8003"
+      published: "18003"
       protocol: tcp
   productwebapi:
     build:
       context: C:\Users\bradmin\source\repos\DemoMicroServicesSolution
       dockerfile: ProductWebApi/Dockerfile
-    container_name: product_api
+    container_name: product-api
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: https://+:443;http://+:80
@@ -80,10 +120,6 @@ services:
     ports:
     - mode: ingress
       target: 80
-      protocol: tcp
-    - mode: ingress
-      target: 80
-      published: "8004"
       protocol: tcp
     - mode: ingress
       target: 443

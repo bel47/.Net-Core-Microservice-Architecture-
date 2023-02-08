@@ -12,24 +12,22 @@ services:
     networks: 
       - backend
     ports:
-      - 8001:1433
+      - 18001:1433
   customerwebapi:
     image: ${DOCKER_REGISTRY-}customerwebapi
-    container_name: customer_api
+    container_name: customer-api
     build:
       context: .
       dockerfile: CustomerWebAPI/Dockerfile
     networks: 
       - backend
-    ports:
-      - 8002:80
+    #ports:
+    #  - 8002:80
     environment:
       - DB_HOST=customerdb
       - DB_Name=dms_customer
       - DB_SA_PASSWORD=P@ssw0rd
      
-
-
   productdb:
     container_name: product_db
     image: mysql:8.0.32-oracle
@@ -38,17 +36,17 @@ services:
     networks: 
       - backend
     ports:
-      - 8003:3306
+      - 18003:3306
   productwebapi:
-    container_name: product_api
+    container_name: product-api
     image: ${DOCKER_REGISTRY-}productwebapi
     build:
       context: .
       dockerfile: ProductWebApi/Dockerfile
     networks:
       - backend
-    ports:
-      - 8004:80
+    #ports:
+    #  - 8004:80
     environment:
       - DB_HOST=productdb
       - DB_Name=dms_product
@@ -62,15 +60,26 @@ services:
     ports:
       - 18005:27017
   orderwebapi:
-    container_name: order_api
+    container_name: order-api
     image: ${DOCKER_REGISTRY-}orderwebapi
     build:
       context: .
       dockerfile: OrderWebApi/Dockerfile
     networks:
       - backend
-    ports:
-      - 18006:80
+    #ports:
+    #  - 18006:80
     environment:
       - DB_HOST=orderdb
       - DB_Name=dms_order
+
+  apigateway:
+    container_name: "api-gateway"
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    networks:
+      - backend
+    ports:
+      - 8001:80

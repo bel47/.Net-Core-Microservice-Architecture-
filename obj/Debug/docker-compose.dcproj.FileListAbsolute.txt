@@ -58,3 +58,17 @@ C:\Users\bradmin\source\repos\DemoMicroServicesSolution\bin\Debug\ZstdSharp.dll
 C:\Users\bradmin\source\repos\DemoMicroServicesSolution\bin\Debug\AWSSDK.Core.dll
 C:\Users\bradmin\source\repos\DemoMicroServicesSolution\bin\Debug\Snappier.dll
 C:\Users\bradmin\source\repos\DemoMicroServicesSolution\bin\Debug\OrderWebApi.pdb
+C:\Users\bradmin\source\repos\DemoMicroServicesSolution\bin\Debug\ApiGateway.deps.json
+C:\Users\bradmin\source\repos\DemoMicroServicesSolution\bin\Debug\ApiGateway.runtimeconfig.json
+C:\Users\bradmin\source\repos\DemoMicroServicesSolution\bin\Debug\ocelot.json
+C:\Users\bradmin\source\repos\DemoMicroServicesSolution\bin\Debug\ApiGateway.exe
+C:\Users\bradmin\source\repos\DemoMicroServicesSolution\bin\Debug\ApiGateway.dll
+C:\Users\bradmin\source\repos\DemoMicroServicesSolution\bin\Debug\Ocelot.dll
+C:\Users\bradmin\source\repos\DemoMicroServicesSolution\bin\Debug\Newtonsoft.Json.dll
+C:\Users\bradmin\source\repos\DemoMicroServicesSolution\bin\Debug\Microsoft.Extensions.DiagnosticAdapter.dll
+C:\Users\bradmin\source\repos\DemoMicroServicesSolution\bin\Debug\FluentValidation.dll
+C:\Users\bradmin\source\repos\DemoMicroServicesSolution\bin\Debug\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\bradmin\source\repos\DemoMicroServicesSolution\bin\Debug\Microsoft.AspNetCore.MiddlewareAnalysis.dll
+C:\Users\bradmin\source\repos\DemoMicroServicesSolution\bin\Debug\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\bradmin\source\repos\DemoMicroServicesSolution\bin\Debug\Newtonsoft.Json.Bson.dll
+C:\Users\bradmin\source\repos\DemoMicroServicesSolution\bin\Debug\ApiGateway.pdb

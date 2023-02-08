@@ -1,0 +1,91 @@
+{
+  "Routes": [
+    //Customer Web API
+    {
+      "UpstreamPathTemplate": "/api/Customer",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customerwebapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Customer"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Customer/{customerId}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customerwebapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Customer/{customerID}"
+    },
+
+    //Product Web API
+    {
+      "UpstreamPathTemplate": "/api/Product",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productwebapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Product"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Product/{productId}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productwebapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Product/{productId}"
+    },
+
+    //Order Web API
+    {
+      "UpstreamPathTemplate": "/api/Order",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderwebapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Order"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Order/{orderId}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderwebapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Order/{orderId}"
+    }
+  ],
+  //allows you to override route specific settings
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:800"
+  }
+}

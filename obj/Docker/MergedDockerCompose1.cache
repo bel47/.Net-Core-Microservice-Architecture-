@@ -1,5 +1,82 @@
 name: dockercompose9358993901870551065
 services:
+  apigateway:
+    build:
+      context: C:\Users\bradmin\source\repos\DemoMicroServicesSolution
+      dockerfile: ApiGateway/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: ApiGateway
+      target: base
+    container_name: api-gateway
+    entrypoint:
+    - tail
+    - -f
+    - /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      DOTNET_USE_POLLING_FILE_WATCHER: "1"
+      NUGET_FALLBACK_PACKAGES: /root/.nuget/fallbackpackages
+    image: apigateway:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages
+        --additionalProbingPath /root/.nuget/fallbackpackages  "/app/bin/Debug/net6.0/ApiGateway.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    networks:
+      backend: null
+    ports:
+    - mode: ingress
+      target: 80
+      protocol: tcp
+    - mode: ingress
+      target: 80
+      published: "8001"
+      protocol: tcp
+    tty: true
+    volumes:
+    - type: bind
+      source: C:\Users\bradmin\source\repos\DemoMicroServicesSolution\ApiGateway
+      target: /app
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\bradmin\source\repos\DemoMicroServicesSolution
+      target: /src
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\bradmin\vsdbg\vs2017u5
+      target: /remote_debugger
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\bradmin\.nuget\packages\
+      target: /root/.nuget/packages
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Program Files\dotnet\sdk\NuGetFallbackFolder
+      target: /root/.nuget/fallbackpackages
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\bradmin\AppData\Roaming/ASP.NET/Https
+      target: /root/.aspnet/https
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\bradmin\AppData\Roaming/Microsoft/UserSecrets
+      target: /root/.microsoft/usersecrets
+      read_only: true
+      bind:
+        create_host_path: true
   customerdb:
     container_name: customer_db
     environment:
@@ -11,7 +88,7 @@ services:
     ports:
     - mode: ingress
       target: 1433
-      published: "8001"
+      published: "18001"
       protocol: tcp
   customerwebapi:
     build:
@@ -21,7 +98,7 @@ services:
         com.microsoft.created-by: visual-studio
         com.microsoft.visual-studio.project-name: CustomerWebAPI
       target: base
-    container_name: customer_api
+    container_name: customer-api
     entrypoint:
     - tail
     - -f
@@ -48,10 +125,6 @@ services:
     ports:
     - mode: ingress
       target: 80
-      protocol: tcp
-    - mode: ingress
-      target: 80
-      published: "8002"
       protocol: tcp
     - mode: ingress
       target: 443
@@ -97,6 +170,91 @@ services:
       target: /src
       bind:
         create_host_path: true
+  orderdb:
+    container_name: order_db
+    image: mongo
+    networks:
+      backend: null
+    ports:
+    - mode: ingress
+      target: 27017
+      published: "18005"
+      protocol: tcp
+  orderwebapi:
+    build:
+      context: C:\Users\bradmin\source\repos\DemoMicroServicesSolution
+      dockerfile: OrderWebApi/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: OrderWebApi
+      target: base
+    container_name: order-api
+    entrypoint:
+    - tail
+    - -f
+    - /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      DB_HOST: orderdb
+      DB_Name: dms_order
+      DOTNET_USE_POLLING_FILE_WATCHER: "1"
+      NUGET_FALLBACK_PACKAGES: /root/.nuget/fallbackpackages
+    image: orderwebapi:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages
+        --additionalProbingPath /root/.nuget/fallbackpackages  "/app/bin/Debug/net6.0/OrderWebApi.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    networks:
+      backend: null
+    ports:
+    - mode: ingress
+      target: 80
+      protocol: tcp
+    tty: true
+    volumes:
+    - type: bind
+      source: C:\Users\bradmin\source\repos\DemoMicroServicesSolution\OrderWebApi
+      target: /app
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\bradmin\source\repos\DemoMicroServicesSolution
+      target: /src
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\bradmin\vsdbg\vs2017u5
+      target: /remote_debugger
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\bradmin\.nuget\packages\
+      target: /root/.nuget/packages
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Program Files\dotnet\sdk\NuGetFallbackFolder
+      target: /root/.nuget/fallbackpackages
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\bradmin\AppData\Roaming/ASP.NET/Https
+      target: /root/.aspnet/https
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\bradmin\AppData\Roaming/Microsoft/UserSecrets
+      target: /root/.microsoft/usersecrets
+      read_only: true
+      bind:
+        create_host_path: true
   productdb:
     container_name: product_db
     environment:
@@ -107,7 +265,7 @@ services:
     ports:
     - mode: ingress
       target: 3306
-      published: "8003"
+      published: "18003"
       protocol: tcp
   productwebapi:
     build:
@@ -117,7 +275,7 @@ services:
         com.microsoft.created-by: visual-studio
         com.microsoft.visual-studio.project-name: ProductWebApi
       target: base
-    container_name: product_api
+    container_name: product-api
     entrypoint:
     - tail
     - -f
@@ -144,10 +302,6 @@ services:
     ports:
     - mode: ingress
       target: 80
-      protocol: tcp
-    - mode: ingress
-      target: 80
-      published: "8004"
       protocol: tcp
     - mode: ingress
       target: 443
