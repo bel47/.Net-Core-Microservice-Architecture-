@@ -1,0 +1,76 @@
+version: '3.4'
+
+networks:
+  backend:
+services:
+  customerdb:
+    container_name: customer_db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=P@ssw0rd
+    networks: 
+      - backend
+    ports:
+      - 8001:1433
+  customerwebapi:
+    image: ${DOCKER_REGISTRY-}customerwebapi
+    container_name: customer_api
+    build:
+      context: .
+      dockerfile: CustomerWebAPI/Dockerfile
+    networks: 
+      - backend
+    ports:
+      - 8002:80
+    environment:
+      - DB_HOST=customerdb
+      - DB_Name=dms_customer
+      - DB_SA_PASSWORD=P@ssw0rd
+     
+
+
+  productdb:
+    container_name: product_db
+    image: mysql:8.0.32-oracle
+    environment:
+      - MYSQL_ROOT_PASSWORD=P@ssw0rd
+    networks: 
+      - backend
+    ports:
+      - 8003:3306
+  productwebapi:
+    container_name: product_api
+    image: ${DOCKER_REGISTRY-}productwebapi
+    build:
+      context: .
+      dockerfile: ProductWebApi/Dockerfile
+    networks:
+      - backend
+    ports:
+      - 8004:80
+    environment:
+      - DB_HOST=productdb
+      - DB_Name=dms_product
+      - DB_PASSWORD=P@ssw0rd
+     
+  orderdb:
+    container_name: order_db
+    image: mongo
+    networks: 
+      - backend
+    ports:
+      - 18005:27017
+  orderwebapi:
+    container_name: order_api
+    image: ${DOCKER_REGISTRY-}orderwebapi
+    build:
+      context: .
+      dockerfile: OrderWebApi/Dockerfile
+    networks:
+      - backend
+    ports:
+      - 18006:80
+    environment:
+      - DB_HOST=orderdb
+      - DB_Name=dms_order
