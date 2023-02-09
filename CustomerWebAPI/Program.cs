@@ -31,7 +31,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//Bel-Note: uncomment to enable https
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

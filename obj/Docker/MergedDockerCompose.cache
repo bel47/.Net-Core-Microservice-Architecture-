@@ -10,6 +10,7 @@ services:
     image: apigateway
     networks:
       backend: null
+      frontend: null
     ports:
     - mode: ingress
       target: 80
@@ -18,6 +19,41 @@ services:
       target: 80
       published: "8001"
       protocol: tcp
+  blazorserverwebui:
+    build:
+      context: C:\Users\bradmin\source\repos\DemoMicroServicesSolution
+      dockerfile: BlazorServerWebUI/Dockerfile
+    container_name: blazor-web-ui
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: blazorserverwebui
+    networks:
+      frontend: null
+    ports:
+    - mode: ingress
+      target: 80
+      protocol: tcp
+    - mode: ingress
+      target: 80
+      published: "8002"
+      protocol: tcp
+    - mode: ingress
+      target: 443
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: C:\Users\bradmin\AppData\Roaming/Microsoft/UserSecrets
+      target: /root/.microsoft/usersecrets
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\bradmin\AppData\Roaming/ASP.NET/Https
+      target: /root/.aspnet/https
+      read_only: true
+      bind:
+        create_host_path: true
   customerdb:
     container_name: customer_db
     environment:
@@ -140,3 +176,5 @@ services:
 networks:
   backend:
     name: dockercompose9358993901870551065_backend
+  frontend:
+    name: dockercompose9358993901870551065_frontend
