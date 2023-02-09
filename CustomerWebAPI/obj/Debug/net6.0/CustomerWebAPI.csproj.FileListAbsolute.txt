@@ -85,3 +85,6 @@ C:\Users\bradmin\source\repos\DemoMicroServicesSolution\CustomerWebAPI\obj\Debug
 C:\Users\bradmin\source\repos\DemoMicroServicesSolution\CustomerWebAPI\obj\Debug\net6.0\CustomerWebAPI.pdb
 C:\Users\bradmin\source\repos\DemoMicroServicesSolution\CustomerWebAPI\obj\Debug\net6.0\CustomerWebAPI.genruntimeconfig.cache
 C:\Users\bradmin\source\repos\DemoMicroServicesSolution\CustomerWebAPI\obj\Debug\net6.0\ref\CustomerWebAPI.dll
+C:\Users\bradmin\source\repos\DemoMicroServicesSolution\CustomerWebAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\bradmin\source\repos\DemoMicroServicesSolution\CustomerWebAPI\bin\Debug\net6.0\JwtAutenticationManager.dll
+C:\Users\bradmin\source\repos\DemoMicroServicesSolution\CustomerWebAPI\bin\Debug\net6.0\JwtAutenticationManager.pdb

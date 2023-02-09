@@ -17,6 +17,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateway", "ApiGateway", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "ApiGateway\ApiGateway.csproj", "{B56D90E4-7132-4F5D-A2E6-B7C61BE593E4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JwtAutenticationManager", "JwtAutenticationManager\JwtAutenticationManager.csproj", "{CF111564-8869-428C-A6A6-3622CEA9EA33}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationWebApi", "AuthenticationWebApi\AuthenticationWebApi.csproj", "{D784408F-7548-4199-86A5-A53763A563F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +47,14 @@ Global
 		{B56D90E4-7132-4F5D-A2E6-B7C61BE593E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B56D90E4-7132-4F5D-A2E6-B7C61BE593E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B56D90E4-7132-4F5D-A2E6-B7C61BE593E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF111564-8869-428C-A6A6-3622CEA9EA33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF111564-8869-428C-A6A6-3622CEA9EA33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF111564-8869-428C-A6A6-3622CEA9EA33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF111564-8869-428C-A6A6-3622CEA9EA33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D784408F-7548-4199-86A5-A53763A563F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D784408F-7548-4199-86A5-A53763A563F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D784408F-7548-4199-86A5-A53763A563F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D784408F-7548-4199-86A5-A53763A563F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

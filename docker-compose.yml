@@ -83,3 +83,13 @@ services:
       - backend
     ports:
       - 8001:80
+
+
+  authenticationwebapi:
+    container_name: "authentication-api"
+    image: ${DOCKER_REGISTRY-}authenticationwebapi
+    build:
+      context: .
+      dockerfile: AuthenticationWebApi/Dockerfile
+    networks:
+      - backend

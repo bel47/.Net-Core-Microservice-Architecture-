@@ -1,15 +1,12 @@
 using CustomerWebAPI;
+using JwtAutenticationManager;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 //Database Context Dependency Injection
-/*var dHost = "localhost";
-var dName = "dms_customer";
-var dbPassword = "P@ssw0rd";*/
 var dHost = Environment.GetEnvironmentVariable("DB_HOST");
 var dName = Environment.GetEnvironmentVariable("DB_Name");
 var dbPassword = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
@@ -18,6 +15,7 @@ var connectionString = $"Data Source={dHost};Initial Catalog={dName};User ID=sa;
 
 builder.Services.AddDbContext<CustomerDbContext>(opt => opt.UseSqlServer(connectionString));
 builder.Services.AddControllers();
+builder.Services.AddeCustomeJwtAuthentication();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -33,7 +31,7 @@ if (app.Environment.IsDevelopment())
 
 //Bel-Note: uncomment to enable https
 //app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

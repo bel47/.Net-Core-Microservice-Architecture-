@@ -18,6 +18,19 @@ services:
       target: 80
       published: "8001"
       protocol: tcp
+  authenticationwebapi:
+    build:
+      context: C:\Users\bradmin\source\repos\DemoMicroServicesSolution
+      dockerfile: AuthenticationWebApi/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: authenticationwebapi
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 80
+      protocol: tcp
   customerdb:
     container_name: customer_db
     environment:
@@ -140,3 +153,5 @@ services:
 networks:
   backend:
     name: dockercompose9358993901870551065_backend
+  default:
+    name: dockercompose9358993901870551065_default
